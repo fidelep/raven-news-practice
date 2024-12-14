@@ -13,6 +13,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "NEWS_SERVICE_BASE_URL", "\"http://hn.algolia.com/api\"")
+        buildConfigField("String", "BASE_URL_API_VERSION", "\"v1\"")
+        buildConfigField("String", "BASE_URL_DEFAULT_TOPIC", "\"android\"")
     }
 
     buildTypes {
@@ -31,11 +35,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
     // modules
     api(project(":domain"))
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
 
     // room
     implementation(libs.room)
