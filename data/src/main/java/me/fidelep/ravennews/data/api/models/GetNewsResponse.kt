@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class GetNewsResponse(
     @SerializedName("hits")
-    val articles: List<NewsArticleDTO>,
+    val stories: List<NewsStoryDTO>,
 )

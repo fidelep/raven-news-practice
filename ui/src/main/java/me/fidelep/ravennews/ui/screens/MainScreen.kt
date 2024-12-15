@@ -16,13 +16,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import me.fidelep.ravennews.domain.models.NewsArticleModel
+import me.fidelep.ravennews.domain.models.NewsStoryModel
 import me.fidelep.ravennews.ui.views.StoryListItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
-    stories: List<NewsArticleModel>,
+    stories: List<NewsStoryModel>,
     onRefresh: () -> Unit,
     onItemClick: (String) -> Unit,
     onItemRemove: (Int) -> Unit,
@@ -61,7 +61,7 @@ fun MainScreen(
                 StoryListItem(
                     storyModel = story,
                     dismissState = dismissState,
-                    { onItemClick(story.storyUrl) },
+                    { onItemClick(story.url) },
                 )
                 HorizontalDivider(color = Color.Gray)
             }
@@ -72,14 +72,14 @@ fun MainScreen(
 @Preview
 @Composable
 private fun MainScreenPreview() {
-    val mockedList = mutableListOf<NewsArticleModel>()
+    val mockedList = mutableListOf<NewsStoryModel>()
     for (i in 1..10) {
         mockedList.add(
             NewsArticleModel(
                 author = "Author full name",
                 title = "Title of the given article migth be way too large",
                 createdAt = "30h",
-                storyUrl = "url",
+                url = "url",
             ),
         )
     }

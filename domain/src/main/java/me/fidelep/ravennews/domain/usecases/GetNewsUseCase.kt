@@ -1,10 +1,10 @@
 package me.fidelep.ravennews.domain.usecases
 
 import me.fidelep.ravennews.domain.interfaces.INewsRepository
-import me.fidelep.ravennews.domain.models.NewsArticleWrapper
+import me.fidelep.ravennews.domain.models.NewsStoryWrapper
 
 class GetNewsUseCase(
     private val repository: INewsRepository,
 ) {
-    suspend operator fun invoke(topic: String): NewsArticleWrapper = repository.getNews(topic)
+    suspend operator fun invoke(topic: String): NewsStoryWrapper = repository.getNews(topic)
 }

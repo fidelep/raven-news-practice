@@ -4,5 +4,5 @@ data class NewsArticleModel(
     val author: String,
     val title: String,
     val createdAt: String,
-    val storyUrl: String,
+    val url: String,
 )

@@ -23,11 +23,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import me.fidelep.ravennews.domain.models.NewsArticleModel
+import me.fidelep.ravennews.domain.models.NewsStoryModel
 
 @Composable
 fun StoryListItem(
-    storyModel: NewsArticleModel,
+    storyModel: NewsStoryModel,
     dismissState: SwipeToDismissBoxState,
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -94,11 +94,11 @@ fun DismissBackground(modifier: Modifier = Modifier) {
 @Composable
 private fun StoryListItemPreview() {
     val mockedStory =
-        NewsArticleModel(
+        NewsStoryModel(
             author = "Author full name",
             title = "Title of the given article might be way too large",
             createdAt = "30h",
-            storyUrl = "url",
+            url = "url",
         )
     StoryListItem(mockedStory, rememberSwipeToDismissBoxState(), {})
 }

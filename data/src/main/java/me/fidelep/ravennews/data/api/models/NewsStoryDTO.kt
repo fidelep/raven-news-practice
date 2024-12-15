@@ -1,9 +1,9 @@
 package me.fidelep.ravennews.data.api.models
 
 import com.google.gson.annotations.SerializedName
-import me.fidelep.ravennews.domain.models.NewsArticleModel
+import me.fidelep.ravennews.domain.models.NewsStoryModel
 
-data class NewsArticleDTO(
+data class NewsStoryDTO(
     @SerializedName("author")
     val author: String,
     @SerializedName("story_title")
@@ -14,10 +14,10 @@ data class NewsArticleDTO(
     val storyUrl: String,
 )
 
-fun NewsArticleDTO.toModel() =
-    NewsArticleModel(
+fun NewsStoryDTO.toModel() =
+    NewsStoryModel(
         author = author,
         title = title,
         createdAt = createdAt,
-        storyUrl = storyUrl,
+        url = storyUrl,
     )
