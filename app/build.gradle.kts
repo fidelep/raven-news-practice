@@ -54,6 +54,7 @@ android {
 dependencies {
     // modules
     api(project(":data"))
+    api(project(":ui"))
 
     // room
     implementation(libs.room)
