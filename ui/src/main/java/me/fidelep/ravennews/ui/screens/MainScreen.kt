@@ -47,7 +47,7 @@ fun MainScreen(
                     rememberSwipeToDismissBoxState(
                         confirmValueChange = {
                             when (it) {
-                                SwipeToDismissBoxValue.EndToStart -> onItemRemove(1) // TODO: Modify to model.storyId
+                                SwipeToDismissBoxValue.EndToStart -> onItemRemove(story.id)
 
                                 SwipeToDismissBoxValue.Settled -> return@rememberSwipeToDismissBoxState false
 
@@ -75,9 +75,10 @@ private fun MainScreenPreview() {
     val mockedList = mutableListOf<NewsStoryModel>()
     for (i in 1..10) {
         mockedList.add(
-            NewsArticleModel(
+            NewsStoryModel(
+                id = i,
                 author = "Author full name",
-                title = "Title of the given article migth be way too large",
+                title = "Title of the given article $i might be way too large",
                 createdAt = "30h",
                 url = "url",
             ),

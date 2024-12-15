@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import me.fidelep.ravennews.domain.models.NewsStoryModel
 
 data class NewsStoryDTO(
+    @SerializedName("story_id")
+    val storyId: Int,
     @SerializedName("author")
     val author: String,
     @SerializedName("story_title")
@@ -16,6 +18,7 @@ data class NewsStoryDTO(
 
 fun NewsStoryDTO.toModel() =
     NewsStoryModel(
+        id = storyId,
         author = author,
         title = title,
         createdAt = createdAt,

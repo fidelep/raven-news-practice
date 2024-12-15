@@ -95,6 +95,7 @@ fun DismissBackground(modifier: Modifier = Modifier) {
 private fun StoryListItemPreview() {
     val mockedStory =
         NewsStoryModel(
+            id = 1,
             author = "Author full name",
             title = "Title of the given article might be way too large",
             createdAt = "30h",
