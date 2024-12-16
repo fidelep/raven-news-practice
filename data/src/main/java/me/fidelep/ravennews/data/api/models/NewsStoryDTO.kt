@@ -9,18 +9,18 @@ data class NewsStoryDTO(
     @SerializedName("author")
     val author: String,
     @SerializedName("story_title")
-    val title: String,
+    val title: String?,
     @SerializedName("created_at")
-    val createdAt: String,
+    val createdAt: String?,
     @SerializedName("story_url")
-    val storyUrl: String,
+    val storyUrl: String?,
 )
 
 fun NewsStoryDTO.toModel() =
     NewsStoryModel(
         id = storyId,
         author = author,
-        title = title,
-        createdAt = createdAt,
-        url = storyUrl,
+        title = title ?: "",
+        createdAt = createdAt ?: "",
+        url = storyUrl ?: "",
     )

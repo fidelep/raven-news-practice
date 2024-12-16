@@ -46,24 +46,24 @@ fun MainScreen(
                 val dismissState =
                     rememberSwipeToDismissBoxState(
                         confirmValueChange = {
-                            when (it) {
-                                SwipeToDismissBoxValue.EndToStart -> onItemRemove(story.id)
-
-                                SwipeToDismissBoxValue.Settled -> return@rememberSwipeToDismissBoxState false
-
-                                SwipeToDismissBoxValue.StartToEnd -> return@rememberSwipeToDismissBoxState false
+                            if (it != SwipeToDismissBoxValue.EndToStart) {
+                                return@rememberSwipeToDismissBoxState false
                             }
+
+                            onItemRemove(story.id)
                             return@rememberSwipeToDismissBoxState true
                         },
                         positionalThreshold = { it * .3f },
                     )
 
-                StoryListItem(
-                    storyModel = story,
-                    dismissState = dismissState,
-                    { onItemClick(story.url) },
-                )
-                HorizontalDivider(color = Color.Gray)
+                if (dismissState.currentValue != SwipeToDismissBoxValue.EndToStart) {
+                    StoryListItem(
+                        storyModel = story,
+                        dismissState = dismissState,
+                        { onItemClick(story.url) },
+                    )
+                    HorizontalDivider(color = Color.Gray)
+                }
             }
         }
     }

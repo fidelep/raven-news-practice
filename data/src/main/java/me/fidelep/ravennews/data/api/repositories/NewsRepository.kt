@@ -12,7 +12,13 @@ class NewsRepository(
 ) : INewsRepository {
     override suspend fun getNews(topic: String): NewsStoryWrapper =
         try {
-            NewsStoryWrapper.Success(newsApi.getNews(topic).stories.map { it.toModel() })
+            NewsStoryWrapper.Success(
+                newsApi
+                    .getNews(topic)
+                    .stories
+                    .filter { !it.title.isNullOrEmpty() }
+                    .map { it.toModel() },
+            )
         } catch (throwable: Throwable) {
             when (throwable) {
                 is IOException -> NewsStoryWrapper.NetworkError

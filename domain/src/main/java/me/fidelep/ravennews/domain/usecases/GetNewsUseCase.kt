@@ -5,6 +5,6 @@ import me.fidelep.ravennews.domain.models.NewsStoryWrapper
 
 class GetNewsUseCase(
     private val repository: INewsRepository,
-) {
-    suspend operator fun invoke(topic: String): NewsStoryWrapper = repository.getNews(topic)
+) : IUseCase<String, NewsStoryWrapper> {
+    override suspend fun invoke(param: String): NewsStoryWrapper = repository.getNews(param)
 }
