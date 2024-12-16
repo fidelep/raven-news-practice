@@ -11,9 +11,6 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,13 +30,10 @@ fun MainScreen(
 ) {
     val pullState =
         rememberPullToRefreshState()
-    val isRefreshing by remember {
-        mutableStateOf(isLoading)
-    }
 
     Surface(modifier = modifier) {
         PullToRefreshBox(
-            isRefreshing = isRefreshing,
+            isRefreshing = isLoading,
             onRefresh = onRefresh,
             state = pullState,
             contentAlignment = Alignment.TopCenter,

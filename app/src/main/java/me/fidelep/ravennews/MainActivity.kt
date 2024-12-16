@@ -18,6 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.lifecycleScope
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
     private val tag = MainActivity::class.simpleName
 
     private val viewModel: MainActivityViewModel by viewModels()
-    private var isRefreshing = false
+    private var isRefreshing = mutableStateOf(false)
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,9 +78,11 @@ class MainActivity : ComponentActivity() {
                         composable(Screens.Main.route) {
                             viewModel.getNews()
 
+                            val isLoading = remember { isRefreshing }
+
                             MainScreen(
                                 stories = viewModel.newsState.collectAsState(initial = listOf()).value,
-                                isRefreshing,
+                                isLoading.value,
                                 onRefresh = { refreshNews() },
                                 onItemClick = { url -> openInBrowser(url, navController) },
                                 onItemRemove = { storyId -> removeItem(storyId) },
@@ -103,17 +107,17 @@ class MainActivity : ComponentActivity() {
             viewModel.uiState.collect {
                 when (it) {
                     is UiEvents.ERROR -> {
-                        isRefreshing = false
+                        isRefreshing.value = false
                         handleError(it)
                     }
 
                     UiEvents.LOADING -> {
-                        isRefreshing = true
+                        isRefreshing.value = true
                         Log.d(tag, "Loading state")
                     }
 
                     UiEvents.IDLE -> {
-                        isRefreshing = false
+                        isRefreshing.value = false
                         Log.d(tag, "Loading state stopped")
                     }
                 }
@@ -128,6 +132,7 @@ class MainActivity : ComponentActivity() {
                 0x01 -> getString(R.string.an_error_occurred)
                 0x02 -> getString(R.string.verify_your_internet_connection)
                 0x03 -> getString(R.string.error_while_deleting_story_may_appear_again)
+                0x04 -> getString(R.string.nothing_to_show)
                 else -> it.message
             }
         Toast
@@ -163,7 +168,7 @@ class MainActivity : ComponentActivity() {
             return
         }
 
-        isRefreshing = true
+        isRefreshing.value = true
 
         val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
         navController
@@ -175,7 +180,7 @@ class MainActivity : ComponentActivity() {
                 restoreState = true
             }.also {
                 Log.d(tag, "open in browser[$url]")
-                isRefreshing = false
+                isRefreshing.value = false
             }
     }
 
