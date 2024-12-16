@@ -19,11 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.fidelep.ravennews.domain.models.NewsStoryModel
+import me.fidelep.ravennews.ui.R
 
 @Composable
 fun StoryListItem(
@@ -36,25 +38,25 @@ fun StoryListItem(
         state = dismissState,
         enableDismissFromStartToEnd = false,
         modifier =
-            modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .background(Color.White)
-                .padding(8.dp)
-                .clickable(onClick = onItemClick),
+        modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .background(Color.White)
+            .padding(8.dp)
+            .clickable(onClick = onItemClick),
         backgroundContent = { DismissBackground() },
     ) {
         Column(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .background(Color.White),
+            Modifier
+                .fillMaxWidth()
+                .background(Color.White),
         ) {
             Text(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
                 style = MaterialTheme.typography.titleLarge,
                 text = storyModel.title,
             )
@@ -84,7 +86,7 @@ fun DismissBackground(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.CenterEnd,
     ) {
         Text(
-            text = "Delete",
+            text = stringResource(R.string.delete),
             color = Color.White,
         )
     }

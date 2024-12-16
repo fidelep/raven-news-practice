@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Raven News</string>
+    <string name="back">Back</string>
+    <string name="go_back">go back</string>
+    <string name="url_to_story_wasn_t_provided">Url to story wasn\'t provided</string>
+    <string name="an_error_occurred">An error occurred</string>
+    <string name="verify_your_internet_connection">Verify your internet connection</string>
+    <string name="error_while_deleting_story_may_appear_again">Error while deleting. Story may appear again</string>
 </resources>

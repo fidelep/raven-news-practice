@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -19,6 +19,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -58,12 +59,12 @@ class MainActivity : ComponentActivity() {
                             navigationIcon = {
                                 IconButton(onClick = { navController.popBackStack() }) {
                                     Icon(
-                                        imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                                        contentDescription = "go back",
+                                        imageVector = Icons.Default.KeyboardArrowLeft,
+                                        contentDescription = stringResource(R.string.go_back),
                                     )
                                 }
                             },
-                            title = { Text("Back") },
+                            title = { Text(stringResource(R.string.back)) },
                         )
                     }
                 }) { innerPadding ->
@@ -103,7 +104,7 @@ class MainActivity : ComponentActivity() {
                 when (it) {
                     is UiEvents.ERROR -> {
                         isRefreshing = false
-                        Log.e(tag, it.toString())
+                        handleError(it)
                     }
 
                     UiEvents.LOADING -> {
@@ -120,6 +121,26 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun handleError(it: UiEvents.ERROR) {
+        // TODO: Move error codes to a common source
+        val errorMessage =
+            when (it.code) {
+                0x01 -> getString(R.string.an_error_occurred)
+                0x02 -> getString(R.string.verify_your_internet_connection)
+                0x03 -> getString(R.string.error_while_deleting_story_may_appear_again)
+                else -> it.message
+            }
+        Toast
+            .makeText(
+                this,
+                errorMessage,
+                Toast.LENGTH_SHORT,
+            ).show()
+            .also {
+                Log.e(tag, it.toString())
+            }
+    }
+
     private fun removeItem(storyId: Int) {
         viewModel.removeNew(storyId)
         Log.d(tag, "remove item [$storyId]")
@@ -130,9 +151,15 @@ class MainActivity : ComponentActivity() {
         navController: NavController,
     ) {
         if (url.isEmpty()) {
-            Toast.makeText(this, "Url to story wasn't provided", Toast.LENGTH_SHORT).show().also {
-                Log.d(tag, "No source provided")
-            }
+            Toast
+                .makeText(
+                    this,
+                    getString(R.string.url_to_story_wasn_t_provided),
+                    Toast.LENGTH_SHORT,
+                ).show()
+                .also {
+                    Log.d(tag, "No source provided")
+                }
             return
         }
 
