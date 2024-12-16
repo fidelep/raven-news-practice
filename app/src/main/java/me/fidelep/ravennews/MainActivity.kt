@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun removeItem(storyId: Int) {
+        viewModel.removeNew(storyId)
         Log.d(tag, "remove item [$storyId]")
     }
 
