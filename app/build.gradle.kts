@@ -53,12 +53,19 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    hilt {
+        enableAggregatingTask = false
+    }
 }
 
 dependencies {
     // modules
     api(project(":data"))
     api(project(":ui"))
+
+    // hilt
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
 
     // room
     implementation(libs.room)
