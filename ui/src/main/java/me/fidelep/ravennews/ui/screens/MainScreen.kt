@@ -78,6 +78,7 @@ private fun MainScreenPreview() {
     for (i in 1..10) {
         mockedList.add(
             NewsStoryModel(
+                objId = "11",
                 id = i,
                 author = "Author full name",
                 title = "Title of the given article $i might be way too large",

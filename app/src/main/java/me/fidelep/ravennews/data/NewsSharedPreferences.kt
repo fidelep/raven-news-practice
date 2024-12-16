@@ -1,7 +1,7 @@
 package me.fidelep.ravennews.data
 
 import android.content.Context
-import me.fidelep.ravennews.data.local.INewsPreferences
+import me.fidelep.ravennews.domain.interfaces.INewsPreferences
 
 class NewsSharedPreferences(
     context: Context,

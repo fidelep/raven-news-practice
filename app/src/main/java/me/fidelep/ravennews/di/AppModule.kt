@@ -15,7 +15,6 @@ import me.fidelep.ravennews.data.api.interceptors.NetworkInterceptor
 import me.fidelep.ravennews.data.db.NewsDb
 import me.fidelep.ravennews.data.db.dao.NewsStoryDao
 import me.fidelep.ravennews.domain.interfaces.INewsPreferences
-import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 @Module
@@ -39,15 +38,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun geNetworkClient(networkInterceptor: INetworkInterceptor): OkHttpClient = NewsApi.buildNetworkInterceptor(networkInterceptor)
-
-    @Singleton
-    @Provides
-    fun provideNewsApi(networkClient: OkHttpClient): NewsApi =
-        NewsApi.build(
-            networkClient,
-            "${BuildConfig.NEWS_SERVICE_BASE_URL}/${BuildConfig.BASE_URL_API_VERSION}/",
-        )
+    fun provideNewsApi(): NewsApi = NewsApi.build("${BuildConfig.NEWS_SERVICE_BASE_URL}/${BuildConfig.BASE_URL_API_VERSION}/")
 
     @Singleton
     @Provides

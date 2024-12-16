@@ -44,11 +44,11 @@ class MainActivityViewModel @Inject constructor(
                     _uiState.emit(UiEvents.ERROR(result.code, result.message))
                 }
 
-                NewsStoryWrapper.GenericError -> {
+                is NewsStoryWrapper.GenericError -> {
                     _uiState.emit(UiEvents.ERROR(0x01))
                 }
 
-                NewsStoryWrapper.NetworkError -> {
+                is NewsStoryWrapper.NetworkError -> {
                     _uiState.emit(UiEvents.ERROR(0x02))
                 }
             }.also {
