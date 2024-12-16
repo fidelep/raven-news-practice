@@ -63,6 +63,9 @@ dependencies {
     api(project(":data"))
     api(project(":ui"))
 
+    // Retrofit TODO: Just implement okhttp instead
+    implementation(libs.retrofit)
+
     // hilt
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.compiler)
