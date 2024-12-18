@@ -16,6 +16,9 @@ ksp = "2.0.21-1.0.28"
 retrofit = "2.11.0"
 composeMaterial = "1.4.0"
 daggerHilt = "2.48"
+mockito = "4.11.0"
+mockitoK = "4.1.0"
+coroutineTest = "1.7.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +48,10 @@ retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHilt" }
+mockito-core = { group ="org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-kotlin = { group ="org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoK" }
+mockito-android = { group ="org.mockito", name = "mockito-android", version.ref = "mockito" }
+kotlinx-coroutines-test = { group ="org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -46,6 +46,12 @@ dependencies {
     implementation(libs.room.coroutines)
     ksp(libs.room.compiler)
 
+    // mockito
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.mockito.android)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

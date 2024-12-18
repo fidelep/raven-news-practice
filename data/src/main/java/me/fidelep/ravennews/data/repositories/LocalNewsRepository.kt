@@ -9,7 +9,6 @@ import me.fidelep.ravennews.domain.interfaces.ILocalNewsRepository
 import me.fidelep.ravennews.domain.interfaces.INewsPreferences
 import me.fidelep.ravennews.domain.models.NewsStoryModel
 import me.fidelep.ravennews.domain.models.NewsStoryWrapper
-import retrofit2.HttpException
 import java.io.IOException
 
 class LocalNewsRepository(
@@ -33,13 +32,6 @@ class LocalNewsRepository(
                         0x04,
                         throwable.message ?: "Error reading from DB",
                     )
-
-                is HttpException ->
-                    NewsStoryWrapper.Error(
-                        throwable.code(),
-                        throwable.message(),
-                    )
-
                 else -> NewsStoryWrapper.GenericError
             }
         }
